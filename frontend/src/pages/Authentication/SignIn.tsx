@@ -13,6 +13,7 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const [email , setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,8 +24,8 @@ const SignIn: React.FC = () => {
       setPassword('');
       navigate('/');
     } catch (error: any) {
-      
       console.log(error.response.data.message);
+      setErrorMessage(error.response.data.message);
     }
   }
 
@@ -183,6 +184,12 @@ const SignIn: React.FC = () => {
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                 Sign In to Meat Shop-IMS
               </h2>
+
+              {errorMessage !== '' ?
+                <h2>{errorMessage}</h2>
+                :
+                null
+              }
 
               <form onSubmit={handleLogin}>
                 <div className="mb-4">
