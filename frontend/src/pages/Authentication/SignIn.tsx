@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 // import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.svg';
+import "../../index.css"
 // import DefaultLayout from '../../layout/DefaultLayout';
 import axios from '../../api/axios';
+
+import { PiEyeClosedBold , PiEyeBold } from "react-icons/pi";
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
@@ -22,6 +25,12 @@ const SignIn: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const [isShow, setIsShow] = useState(false)
+
+  const handleShowPass = () => {
+      setIsShow(!isShow)
   }
 
   return (
@@ -214,14 +223,21 @@ const SignIn: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
-                      type="password"
+                      type={isShow ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="6+ Characters, 1 Capital letter"
                       className="placeholder:text-blue-600/80 w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
 
-                    <span className="absolute right-4 top-4">
+
+
+                    <div className="absolute right-4 top-4 flex justify-center items-center gap-2">
+                      {isShow ?
+                          <PiEyeBold className={`text-xl hover:text-blue-600 transition-all duration-200 delay-75 ${password === '' ? "invisible scale-50 opacity-0" : "visible scale-100 opacity-1"} transition-all duration-150 delay-75`} onClick={handleShowPass}/>
+                          :
+                          <PiEyeClosedBold className={`text-xl hover:text-blue-600 transition-all duration-200 delay-75 ${password === '' ? "invisible scale-50 opacity-0" : "visible scale-100 opacity-1"} transition-all duration-150 delay-75`} onClick={handleShowPass}/>
+                      }
                       <svg
                         className="fill-current"
                         width="22"
@@ -241,7 +257,7 @@ const SignIn: React.FC = () => {
                           />
                         </g>
                       </svg>
-                    </span>
+                    </div>
                   </div>
                 </div>
 
