@@ -4,23 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.svg';
 // import DefaultLayout from '../../layout/DefaultLayout';
-
 import axios from '../../api/axios';
 
 const SignIn: React.FC = () => {
-  const navigate = useNavigate()
-  const [email , setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const navigate = useNavigate();
+  const [email , setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post('/login', {email,password})
-      setEmail("")
-      setPassword("")
-      navigate("/")
+      // Use axios instance 'axios' instead of 'Axios'
+      await axios.post('/login', {email, password});
+      setEmail('');
+      setPassword('');
+      navigate('/');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
