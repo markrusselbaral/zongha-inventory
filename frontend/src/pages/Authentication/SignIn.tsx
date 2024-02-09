@@ -24,7 +24,7 @@ const SignIn: React.FC = () => {
       setPassword('');
       navigate('/');
     } catch (error: any) {
-      console.log(error.response.data.message);
+      console.log(error);
       setErrorMessage(error.response.data.message);
     }
   }
